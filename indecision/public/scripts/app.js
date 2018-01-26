@@ -21,12 +21,31 @@ var Counter = function (_React$Component) {
         _this.handleReset = _this.handleReset.bind(_this);
         _this.state = {
             count: 0
-        };
 
+        };
         return _this;
     }
 
     _createClass(Counter, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var value = localStorage.getItem('count');
+            var countMem = parseInt(value, 10);
+            this.setState(function () {
+                return { count: countMem };
+            });
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+            var value = this.state.count;
+            if (prevState.count !== value) {
+
+                localStorage.setItem('count', value);
+                console.log(value);
+            }
+        }
+    }, {
         key: 'handleAddOne',
         value: function handleAddOne() {
             this.setState(function (prevState) {
